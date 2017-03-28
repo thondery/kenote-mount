@@ -1,6 +1,6 @@
 {
   "name": "kenote-mount",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "mount the directory into an alias",
   "main": "index.js",
   "scripts": {

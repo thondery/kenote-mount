@@ -9,7 +9,8 @@ exports.mounts = function (dir, suffix = null) {
   files.map( file => {
     let fileName = file.replace(/\.(js|jsx|es|ts|tsx)$/i, '')
     if (fileName !== 'index') {
-      obj[`${getHump(fileName)}${suffix}`] = require(path.resolve(dir, file))
+      let definition = require(path.resolve(dir, file))
+      obj[`${getHump(fileName)}${suffix}`] = definition.default || definition
     }
   })
   return obj
@@ -22,7 +23,7 @@ exports.loadModel = function (dir, func) {
     let fileName = file.replace(/\.(js|jsx|es|ts|tsx)$/i, '')
     if (fileName !== 'index') {
       let definition = require(path.resolve(dir, file))
-      model[`${getHump(fileName)}Dao`] = func(definition, fileName)
+      model[`${getHump(fileName)}Dao`] = func(definition.default || definition, fileName)
     }
   })
   return model
